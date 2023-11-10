@@ -43,6 +43,7 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
             fs.writeFile('uploads/' + rand + '.png', base64Data, 'base64', (err) => {
                 if(err) return next(new AppError('Image not uploaded!', 400))
             })
+            console.log(image)
 
             if(image!=null){
                 const uploadFile = process.env.IMAGE_URL + rand + '.png';
