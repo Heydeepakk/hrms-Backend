@@ -37,7 +37,7 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
             const empId = 'Emp00' + 1;
 
             let image = req.body.image;
-            let base64Data = image.replace("data:image/jpeg;base64,", "");
+            let base64Data = image.replace("data:image/png;base64,", "");
             let rand = Math.floor(Math.random() * 9000000 + 1000000)
             // store Image
             fs.writeFile('uploads/' + rand + '.png', base64Data, 'base64', (err) => {
@@ -71,7 +71,7 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
                 let empId = 'Emp00' + u_id;       
                 
                 let image = req.body.image;
-                let base64Data = image.replace("data:image/jpeg;base64,", "");
+                let base64Data = image.replace("data:image/png;base64,", "");
                 let rand = Math.floor(Math.random() * 9000000 + 1000000)
                 // store Image
                 fs.writeFile('uploads/' + rand + '.png', base64Data, 'base64', (err) => {
