@@ -46,6 +46,7 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
             console.log(image)
             const uploadFile = '';
 
+            
             if(image!=null){
                 const uploadFile = process.env.IMAGE_URL + rand + '.png';
             }
