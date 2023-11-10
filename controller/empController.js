@@ -43,13 +43,8 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
             fs.writeFile('uploads/' + rand + '.png', base64Data, 'base64', (err) => {
                 if(err) return next(new AppError('Image not uploaded!', 400))
             })
-            console.log(image)
-            const uploadFile = '';
-
             
-            if(image!=null){
                 const uploadFile = process.env.IMAGE_URL + rand + '.png';
-            }
 
 
             const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
@@ -80,9 +75,12 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
                     if(err) return next(new AppError('Image not uploaded!', 400))
                 })
 
-                if(image!=null){
-                    const uploadFile = process.env.IMAGE_URL + rand + '.png';
+                let uploadFile = '';
+                if(image){
+                    console.log('yes');
+                    uploadFile = process.env.IMAGE_URL + rand + '.png';
                 }
+
                 const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
                 const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,experienceYear, experienceMonth,uploadFile,personal_mobile]
 
