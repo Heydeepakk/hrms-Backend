@@ -11,7 +11,6 @@ const empRoutes = require('./router/empRoutes');
 // start app
 const app = express();
 
-
 // Development Logging
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'));
