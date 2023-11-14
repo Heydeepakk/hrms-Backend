@@ -43,4 +43,9 @@ router
     .route('/get-department-with-company-and-branch-name')
     .post(orgController.getDepartmentWithCompanyBranchName)
 
+router
+    .route('/add-assets')
+    .post(orgController.addAssets)
+
+
 module.exports = router;

@@ -249,3 +249,27 @@ exports.getDepartmentWithCompanyBranchName = catchAsync(async(req, res, next) =>
         
     })
 })
+
+
+//Add assets
+exports.addAssets = catchAsync(async(req, res, next) => {
+
+    const items = await req.body.items;
+    const model_no = await req.body.model_no;
+    const desc = await req.body.desc;
+
+    const sql = `INSERT INTO assets(item_name,model_no,description) VALUES(?,?,?)`;
+    const val = [items, model_no, desc];
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+        res.status(201).json({
+            status: 'success',
+            message: 'Assets added successfully!!'
+        })
+
+    })
+})
