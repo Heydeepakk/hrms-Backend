@@ -22,5 +22,9 @@ router
     .route('/assign-asset')
     .post(empController.assignAsset)
 
+router
+    .route('/get-assign-assets')
+    .get(empController.getAssignAssets)
+
 
 module.exports = router;
