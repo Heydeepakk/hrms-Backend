@@ -191,6 +191,7 @@ exports.getHrWithCompanyAndBranchName = catchAsync(async(req, res, next) => {
     })
 })
 
+// Add Departments
 exports.addDepartment = catchAsync(async(req, res, next) => {
 
     const comp_name = await req.body.comp_name;
@@ -213,6 +214,7 @@ exports.addDepartment = catchAsync(async(req, res, next) => {
     })
 })
 
+//  Get all Departments
 exports.getAllDepartment = catchAsync(async(req, res, next) => {
 
     const sql = `SELECT * FROM org_department`;
@@ -229,6 +231,7 @@ exports.getAllDepartment = catchAsync(async(req, res, next) => {
     })
 })
 
+// Get department with company name and branch name
 exports.getDepartmentWithCompanyBranchName = catchAsync(async(req, res, next) => {
 
     const compName = await req.body.comp_name;
@@ -251,7 +254,7 @@ exports.getDepartmentWithCompanyBranchName = catchAsync(async(req, res, next) =>
 })
 
 
-//Add assets
+//Add company assets
 exports.addAssets = catchAsync(async(req, res, next) => {
 
     const items = await req.body.items;
@@ -274,7 +277,7 @@ exports.addAssets = catchAsync(async(req, res, next) => {
     })
 })
 
-//get All assets
+//get All company assets 
 exports.getAllAssets = catchAsync(async(req, res, next) => {
 
     const sql = `SELECT * FROM assets where status='Active' ORDER BY id DESC`;
@@ -291,7 +294,7 @@ exports.getAllAssets = catchAsync(async(req, res, next) => {
     })
 })
 
-//delete Assets
+//In active company Assets
 exports.deleteAsset = catchAsync(async(req, res, next) => {
 
     const sql = `Update assets SET status = 'In-Active' where id = ?`;
