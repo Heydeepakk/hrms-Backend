@@ -48,5 +48,10 @@ router
     .post(orgController.addAssets)
     .get(orgController.getAllAssets)
 
+router
+    .route('/delete-asset')
+    .post(orgController.deleteAsset)
+
+
 
 module.exports = router;
