@@ -46,6 +46,7 @@ router
 router
     .route('/add-assets')
     .post(orgController.addAssets)
+    // .get(orgController.getAllAssets)
 
 
 module.exports = router;
