@@ -172,7 +172,7 @@ exports.assignAsset = catchAsync(async(req, res, next) => {
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
         
-        //update in assets to make it occupied
+        //update in assets to make it occupied 
         const sql1 = `UPDATE assets SET status = 'Occupied' where id = ?`;
         const val1 = [asset_id];
         con.query(sql1, val1, (err, result) => {
