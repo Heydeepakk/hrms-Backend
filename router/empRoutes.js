@@ -14,4 +14,8 @@ router
     .route('/get-employee-by-id')
     .post(empController.getEmployeeById)
 
+router
+    .route('/get-left-assets')
+    .post(empController.getAssets)
+
 module.exports = router;
