@@ -192,7 +192,7 @@ exports.assignAsset = catchAsync(async(req, res, next) => {
 //get assigned assets
 exports.getAssignAssets = catchAsync(async(req, res, next) => {
 
-    const sql = `SELECT * FROM assign_assets where status = 'Active' AND emp_id = '?' ORDER BY id DESC`;
+    const sql = `SELECT a.* FROM assign_assets as aas right join assets as a  on aas.asset_id=a.id where aas.status = 'Active' AND aas.emp_id = '?' ORDER BY id DESC`;
     const val = [req.body.emp_id]
     con.query(sql,val, (err, result) => {
         
