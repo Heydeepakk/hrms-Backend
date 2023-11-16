@@ -16,6 +16,6 @@ router
 
 router
     .route('/get-left-assets')
-    .post(empController.getAssets)
+    .get(empController.getAssets)
 
 module.exports = router;
