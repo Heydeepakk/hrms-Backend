@@ -156,3 +156,35 @@ exports.getAssets = catchAsync(async(req, res, next) => {
 
     })
 })
+
+
+//Assign Asset
+exports.assignAsset = catchAsync(async(req, res, next) => {
+
+    const asset_id = await req.body.asset_id;
+    const emp_id = await req.body.emp_id;
+    //insert in assign assets because of history
+    const sql = `INSERT INTO assign_assets(asset_id,emp_id) VALUES(?,?)`;
+    const val = [asset_id, emp_id];
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+        
+        //update in assets to make it occupied
+        const sql1 = `UPDATE assets SET status = 'Occupied' where id = ?`;
+        const val1 = [asset_id];
+        con.query(sql1, val1, (err, result) => {
+
+            if(err) return next(new AppError('Something went wrong!', 400));
+            if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+            res.status(201).json({
+                status: 'success',
+                message: 'Assets added successfully!!'
+            })
+    })
+
+    })
+})

@@ -18,4 +18,9 @@ router
     .route('/get-left-assets')
     .get(empController.getAssets)
 
+router
+    .route('/assign-asset')
+    .post(empController.assignAsset)
+
+
 module.exports = router;
