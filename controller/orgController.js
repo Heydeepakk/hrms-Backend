@@ -277,7 +277,7 @@ exports.addAssets = catchAsync(async(req, res, next) => {
 //get All assets
 exports.getAllAssets = catchAsync(async(req, res, next) => {
 
-    const sql = `SELECT * FROM assets ORDER BY id DESC`;
+    const sql = `SELECT * FROM assets where status='Active' ORDER BY id DESC`;
     con.query(sql, (err, result) => {
         
         if(err) return next(new AppError('Something went wrong!', 400));
