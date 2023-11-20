@@ -5,8 +5,8 @@ const con = require('../utils/db');
 
 exports.login = catchAsync(async(req, res, next) => {
 
-    const phone = req.body.phone;
-    const empId = req.body.empId;
+    const phone = await req.body.phone;
+    const empId = await req.body.empId;
 
     const sql = `SELECT * FROM admin WHERE emp_id='${empId}' AND phone='${phone}' AND status='Active'`;
     con.query(sql, (err, result) => {  
