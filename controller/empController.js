@@ -191,7 +191,6 @@ exports.assignAsset = catchAsync(async(req, res, next) => {
 
 //get assigned assets
 exports.getAssignAssets = catchAsync(async(req, res, next) => {
-
     const sql = `SELECT a.* FROM assign_assets as aas right join assets as a  on aas.asset_id=a.id where aas.status = 'Active' AND aas.emp_id = ? ORDER BY id DESC`;
     const val = [req.body.emp_id]
     con.query(sql,val, (err, result) => {
@@ -204,5 +203,34 @@ exports.getAssignAssets = catchAsync(async(req, res, next) => {
             data: result
         })
 
+    })
+})
+
+//Dis-Assign Asset
+exports.disAssignAsset = catchAsync(async(req, res, next) => {
+
+    const asset_id = await req.body.asset_id;
+    //Dis assigning assets because of history
+    const sql = `UPDATE assign_assets SET status='Dis-assign' where asset_id = ?`;
+    const val = [asset_id];
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('Error !!', 400));
+        
+        //update in assets to make it Active 
+        const sql1 = `UPDATE assets SET status = 'Active' where id = ?`;
+        const val1 = [asset_id];
+        con.query(sql1, val1, (err, result) => {
+
+            if(err) return next(new AppError('Something went wrong!', 400));
+            if(result.affectedRows == 0) return next(new AppError('Error !!', 400));
+
+            res.status(201).json({
+                status: 'success',
+                message: 'Dis-Assigned!!'
+            })
+    })
     })
 })

@@ -26,5 +26,9 @@ router
     .route('/get-assign-assets')
     .post(empController.getAssignAssets)
 
+router
+    .route('/dis-assign-asset')
+    .post(empController.disAssignAsset)
+
 
 module.exports = router;
