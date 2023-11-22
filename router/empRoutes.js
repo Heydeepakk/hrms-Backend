@@ -31,8 +31,10 @@ router
     .post(empController.disAssignAsset)
 
 router
-    .route('/add-role')
+    .route('/role')
     .post(empController.addRole)
+    .get(empController.getRole)
+
 
 
 
