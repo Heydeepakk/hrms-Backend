@@ -271,3 +271,29 @@ exports.getRole = catchAsync(async(req, res,next) => {
         })
     })
 })
+
+exports.empRoleUpdate = catchAsync(async(req, res, next) => {
+
+    const role = req.body.role
+    const empId = req.body.empId
+    
+    if(role.length > 0){
+        var arrayAsString = role.join(', ');
+    }else{
+        var arrayAsString = role.join('');
+    }
+    
+    const sql = `UPDATE employee SET role_status=? WHERE emp_id=?`
+    const val = [arrayAsString, empId];
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+        res.status(201).json({
+            status : 'success',
+            message : 'Role updated!'
+        })
+    })
+})

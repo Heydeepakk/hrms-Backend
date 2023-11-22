@@ -35,6 +35,7 @@ router
     .post(empController.addRole)
     .get(empController.getRole)
 
+router.route('/emp-role-update').post(empController.empRoleUpdate)
 
 
 
