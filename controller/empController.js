@@ -293,7 +293,7 @@ exports.empRoleUpdate = catchAsync(async(req, res, next) => {
 
         res.status(201).json({
             status : 'success',
-            message : 'Role updated!'
+            message : 'Employee Role updated!'
         })
     })
 })
