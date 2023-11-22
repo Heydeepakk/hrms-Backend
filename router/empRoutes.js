@@ -30,5 +30,10 @@ router
     .route('/dis-assign-asset')
     .post(empController.disAssignAsset)
 
+router
+    .route('/add-role')
+    .post(empController.addRole)
+
+
 
 module.exports = router;

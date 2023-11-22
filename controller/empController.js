@@ -234,3 +234,23 @@ exports.disAssignAsset = catchAsync(async(req, res, next) => {
     })
     })
 })
+
+exports.addRole = catchAsync(async(req, res, next) => {
+
+    const role = await req.body.role
+
+    const sql = `INSERT INTO emp_role(emp_role) VALUES(?)`
+    const val = [role]
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+        res.status(201).json({
+            status : 'success',
+            message : 'Employe role added!'
+        })
+
+    })
+})
