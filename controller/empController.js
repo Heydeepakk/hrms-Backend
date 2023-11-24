@@ -277,14 +277,14 @@ exports.empRoleUpdate = catchAsync(async(req, res, next) => {
     const role = req.body.role
     const empId = req.body.empId
     
-    if(role.length > 0){
-        var arrayAsString = role.join(', ');
-    }else{
-        var arrayAsString = role.join('');
-    }
+    // if(role.length > 0){
+    //     var arrayAsString = role.join(', ');
+    // }else{
+    //     var arrayAsString = role.join('');
+    // }
     
     const sql = `UPDATE employee SET role_status=? WHERE emp_id=?`
-    const val = [arrayAsString, empId];
+    const val = [role, empId];
 
     con.query(sql, val, (err, result) => {
 
