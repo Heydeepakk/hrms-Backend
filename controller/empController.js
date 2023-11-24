@@ -337,3 +337,30 @@ exports.getAwards = catchAsync(async(req, res,next) => {
         })
     })
 })
+
+//add awards to emp
+exports.empAwardsUpdate = catchAsync(async(req, res, next) => {
+
+    const awards = req.body.awards
+    const empId = req.body.empId
+    
+    if(awards.length > 0){
+        var arrayAsString = awards.join(', ');
+    }else{
+        var arrayAsString = awards.join('');
+    }
+    
+    const sql = `UPDATE employee SET awards=? WHERE emp_id=?`
+    const val = [arrayAsString, empId];
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+        res.status(201).json({
+            status : 'success',
+            message : 'Employee Awards updated!'
+        })
+    })
+})

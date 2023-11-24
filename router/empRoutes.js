@@ -42,4 +42,8 @@ router
     .post(empController.addAwards)
     .get(empController.getAwards)
 
+router
+    .route('/emp-awards-update')
+    .post(empController.empAwardsUpdate)
+
 module.exports = router;
