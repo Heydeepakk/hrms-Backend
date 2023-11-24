@@ -364,3 +364,26 @@ exports.empAwardsUpdate = catchAsync(async(req, res, next) => {
         })
     })
 })
+
+//transfer
+exports.empTransfer = catchAsync(async(req, res, next) => {
+
+    const branch = req.body.branch
+    const department = req.body.department
+    const empId = req.body.empId
+    
+    const sql = `UPDATE employee SET branch=? , department=? WHERE emp_id=?`
+    const val = [branch,department,empId];
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+        res.status(201).json({
+            status : 'success',
+            message : 'Employee Awards updated!'
+        })
+    })
+})
+

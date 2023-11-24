@@ -46,4 +46,9 @@ router
     .route('/emp-awards-update')
     .post(empController.empAwardsUpdate)
 
+router
+    .route('/transfer')
+    .post(empController.empTransfer)
+
+
 module.exports = router;
