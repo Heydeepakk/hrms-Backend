@@ -37,6 +37,9 @@ router
 
 router.route('/emp-role-update').post(empController.empRoleUpdate)
 
-
+router
+    .route('/awards')
+    .post(empController.addAwards)
+    .get(empController.getAwards)
 
 module.exports = router;

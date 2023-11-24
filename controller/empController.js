@@ -297,3 +297,43 @@ exports.empRoleUpdate = catchAsync(async(req, res, next) => {
         })
     })
 })
+
+
+//add awards 
+exports.addAwards = catchAsync(async(req, res, next) => {
+
+    const awards = await req.body.awards
+
+    const sql = `INSERT INTO awards(awards) VALUES(?)`
+    const val = [awards]
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+        res.status(201).json({
+            status : 'success',
+            message : 'Award added!'
+        })
+
+    })
+})
+
+//get Awards
+exports.getAwards = catchAsync(async(req, res,next) => {
+
+    const sql = `SELECT * FROM awards`
+
+    con.query(sql, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.length == 0) return next(new AppError('No Records Found!', 204));
+
+
+        res.status(200).json({
+            status: 'success',
+            data: result
+        })
+    })
+})
