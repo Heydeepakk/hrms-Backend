@@ -129,13 +129,13 @@ exports.getEmployeeById = catchAsync(async(req, res, next) => {
 
     con.query(sql, val, (err, result) => {
 
-        const filePath = result.image;
+        const filePath = result[0].image;
         const imageBuffer = fs.readFileSync(filePath);
 
         // Convert image buffer to base64
         const base64Image = imageBuffer.toString('base64');
 
-        result.image = base64Image;
+        result[0].image = base64Image;
 
 
         if(err) return next(new AppError('Something went wrong!', 400));
