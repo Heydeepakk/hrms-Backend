@@ -135,7 +135,7 @@ exports.getEmployeeById = catchAsync(async(req, res, next) => {
         // Convert image buffer to base64
         const base64Image = imageBuffer.toString('base64');
 
-        result[0].image = base64Image;
+        result[0].image = 'data:image/png;base64,' + base64Image;
 
 
         if(err) return next(new AppError('Something went wrong!', 400));
