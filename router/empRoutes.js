@@ -50,5 +50,10 @@ router
     .route('/transfer')
     .post(empController.empTransfer)
 
+router
+    .route('/promotion')
+    .post(empController.empPromotion)
+
+
 
 module.exports = router;

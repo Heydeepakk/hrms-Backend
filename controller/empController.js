@@ -396,3 +396,23 @@ exports.empTransfer = catchAsync(async(req, res, next) => {
     })
 })
 
+//promotion
+exports.empPromotion = catchAsync(async(req, res, next) => {
+
+    const designation = req.body.designation
+    const empId = req.body.empId
+    
+    const sql = `UPDATE employee SET designation=? WHERE emp_id=?`
+    const val = [designation,empId];
+
+    con.query(sql, val, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+        res.status(201).json({
+            status : 'success',
+            message : 'Employee promoted Successfully!'
+        })
+    })
+})
