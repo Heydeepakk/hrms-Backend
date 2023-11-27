@@ -27,6 +27,18 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
     const experienceMonth = await req.body.experience_month
     const personal_mobile = await req.body.personal_mobile
 
+    const account_holder_name = await req.body.account_holder_name
+    const account_no = await req.body.account_no
+    const bank_name = await req.body.bank_name
+    const bank_branch = await req.body.bank_branch
+    const ifsc = await req.body.ifsc
+    const payment_type = await req.body.payment_type
+    const e_name = await req.body.e_name
+    const e_mobile = await req.body.e_mobile
+    const e_email = await req.body.e_email
+    const e_address = await req.body.e_address
+
+
 
     const empSql = `SELECT id FROM employee ORDER BY id DESC LIMIT 1`;
     con.query(empSql, (err, result) => {
@@ -50,8 +62,8 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
                 uploadFile = process.env.IMAGE_URL + rand + '.png';
             }
 
-            const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
-            const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,experienceYear, experienceMonth,uploadFile,personal_mobile]
+            const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+            const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,experienceYear, experienceMonth,uploadFile,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address]
 
             con.query(sql, val, (err, result) => {
 
@@ -84,8 +96,8 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
                     uploadFile = process.env.IMAGE_URL + rand + '.png';
                 }
 
-                const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
-                const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,experienceYear, experienceMonth,uploadFile,personal_mobile]
+                const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+                const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,experienceYear, experienceMonth,uploadFile,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address]
 
                 con.query(sql, val, (err, result) => {
 
