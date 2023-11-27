@@ -113,6 +113,15 @@ exports.getAllEmployee = catchAsync(async(req, res, next) => {
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.length == 0) return next(new AppError('No Records Found!', 204));
 
+        for (let i = 0; i < result.length; i++) {
+            const filePath = result[i].image;
+            const imageBuffer = fs.readFileSync(filePath);
+
+            const base64Image = imageBuffer.toString('base64');
+            result[i].image = 'data:image/png;base64,' + base64Image;
+
+        }
+
         res.status(200).json({
             status : 'success',
             data : result
