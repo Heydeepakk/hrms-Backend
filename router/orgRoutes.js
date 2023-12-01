@@ -6,15 +6,21 @@ const orgController = require('../controller/orgController');
 
 const router = express.Router();
 
-router
-    .route('/company-name')
-    .post(orgController.createCompanyName)
-    .get(orgController.getAllCompanyName)
+// router
+//     .route('/company-name')
+//     .post(orgController.createCompanyName)
+//     .get(orgController.getAllCompanyName)
+
+// router
+//     .route('/company-with-branch')
+//     .post(orgController.companyWithBranch)
+//     .get(orgController.getAllCompanyWithBranch)
 
 router
-    .route('/company-with-branch')
-    .post(orgController.companyWithBranch)
-    .get(orgController.getAllCompanyWithBranch)
+    .route('/add-company-branch')
+    .post(orgController.addCompanyBranch)
+    .get(orgController.getAllCompanyName)
+
 
 router
     .route('/branch-head')

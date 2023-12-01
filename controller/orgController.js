@@ -3,36 +3,72 @@ const AppError = require('../utils/appError');
 const con = require('../utils/db');
 
 // company create
-exports.createCompanyName = catchAsync(async(req, res, next)  => {
+// exports.createCompanyName = catchAsync(async(req, res, next)  => {
 
-    const comp_name = await req.body.comp_name;
+//     const comp_name = await req.body.comp_name;
 
-    const sql = `INSERT INTO organisation(company_name) VALUES(?)`;
-    con.query(sql, comp_name, (err, result) => {
+//     const sql = `INSERT INTO organisation(company_name) VALUES(?)`;
+//     con.query(sql, comp_name, (err, result) => {
+        
+//         if(err) return next(new AppError('Something went wrong! Please try again later!', 400))
+//         if(result.affectedRows == 0) return next(new AppError('Please fill the Inputs!', 400))
+
+//         res.status(201).json({
+//             status : 'success',
+//             message : 'Company created successfully!'
+//         })
+//     })
+// });
+
+//Add company and branch setup
+exports.addCompanyBranch = catchAsync(async(req, res, next)  => {
+
+    const company_name = await req.body.company_name;
+    const branch_name = await req.body.branch_name;
+    const head = await req.body.head;
+
+
+
+    const sql = `INSERT INTO company_setup(company_name,branch_name,head) VALUES(?,?,?)`;
+    con.query(sql,[company_name,branch_name,head], (err, result) => {
         
         if(err) return next(new AppError('Something went wrong! Please try again later!', 400))
         if(result.affectedRows == 0) return next(new AppError('Please fill the Inputs!', 400))
 
         res.status(201).json({
             status : 'success',
-            message : 'Company created successfully!'
+            message : 'Created successfully!'
         })
     })
 });
 
+
 // fetch company details
+// exports.getAllCompanyName = catchAsync(async(req, res, next) => {
+
+//         const sql = `SELECT id, company_name FROM organisation`;
+//         con.query(sql, (err, result) => {
+//             if(err) return next(new AppError('Something went wrong!', 400));
+//             if(result.length == 0) return next(new AppError('No Records Found!', 204));
+
+//             res.status(200).json({
+//                 status : 'success',
+//                 data : result
+//             })
+//         })
+// });
 exports.getAllCompanyName = catchAsync(async(req, res, next) => {
 
-        const sql = `SELECT id, company_name FROM organisation`;
-        con.query(sql, (err, result) => {
-            if(err) return next(new AppError('Something went wrong!', 400));
-            if(result.length == 0) return next(new AppError('No Records Found!', 204));
+    const sql = `SELECT id, company_name FROM company_setup`;
+    con.query(sql, (err, result) => {
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.length == 0) return next(new AppError('No Records Found!', 204));
 
-            res.status(200).json({
-                status : 'success',
-                data : result
-            })
+        res.status(200).json({
+            status : 'success',
+            data : result
         })
+    })
 });
 
 //  create company with branch
