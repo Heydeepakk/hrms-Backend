@@ -72,79 +72,79 @@ exports.getAllCompanyName = catchAsync(async(req, res, next) => {
 });
 
 //  create company with branch
-exports.companyWithBranch = catchAsync(async(req, res, next) => {
+// exports.companyWithBranch = catchAsync(async(req, res, next) => {
 
-    const comp_name = await req.body.comp_name;
-    const branch_name = await req.body.branch_name;
+//     const comp_name = await req.body.comp_name;
+//     const branch_name = await req.body.branch_name;
 
-    const sql = `INSERT INTO organisation_branch(company_name, branch_name) VALUES(?,?)`;
-    const val = [comp_name, branch_name];
+//     const sql = `INSERT INTO organisation_branch(company_name, branch_name) VALUES(?,?)`;
+//     const val = [comp_name, branch_name];
 
-    con.query(sql, val, (err, result) => {
+//     con.query(sql, val, (err, result) => {
         
-        if(err) return next(new AppError('Something went wrong!!', 400));
-        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+//         if(err) return next(new AppError('Something went wrong!!', 400));
+//         if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
 
-        res.status(201).json({
-            status : 'success',
-            message: 'Branch added successfully with company name!'
-        })
-    })
+//         res.status(201).json({
+//             status : 'success',
+//             message: 'Branch added successfully with company name!'
+//         })
+//     })
 
-})
+// })
 
-// fetch company with branch details
-exports.getAllCompanyWithBranch = catchAsync(async(req, res, next) =>{
+// // fetch company with branch details
+// exports.getAllCompanyWithBranch = catchAsync(async(req, res, next) =>{
 
-    const sql = `SELECT * FROM organisation_branch`;
-    con.query(sql, (err, result) => {
+//     const sql = `SELECT * FROM organisation_branch`;
+//     con.query(sql, (err, result) => {
 
-        if(err) return next(new AppError('Something went wrong!', 400));
-        if(result.length == 0) return next(new AppError('No Records Found!', 204));
+//         if(err) return next(new AppError('Something went wrong!', 400));
+//         if(result.length == 0) return next(new AppError('No Records Found!', 204));
 
-        res.status(200).json({
-            status: 'success',
-            data: result
-        })
-    })
-})
+//         res.status(200).json({
+//             status: 'success',
+//             data: result
+//         })
+//     })
+// })
 
 // create branch head
-exports.addBranchHead = catchAsync(async(req, res, next) => {
-    const comp_name = await req.body.comp_name;
-    const branch_name = await req.body.branch_name;
-    const branch_head = await req.body.branch_head;
+// exports.addBranchHead = catchAsync(async(req, res, next) => {
+//     const comp_name = await req.body.comp_name;
+//     const branch_name = await req.body.branch_name;
+//     const branch_head = await req.body.branch_head;
 
-    const sql = `INSERT INTO org_branch_head(comp_name, branch_name, branch_head) VALUES(?,?,?)`;
-    const val = [comp_name, branch_name, branch_head];
+//     const sql = `INSERT INTO org_branch_head(comp_name, branch_name, branch_head) VALUES(?,?,?)`;
+//     const val = [comp_name, branch_name, branch_head];
 
-    con.query(sql, val, (err, result) => {
+//     con.query(sql, val, (err, result) => {
         
-        if(err) return next(new AppError('Something went wrong!', 400));
-        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+//         if(err) return next(new AppError('Something went wrong!', 400));
+//         if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
 
-        res.status(201).json({
-            status : 'success',
-            message : 'Branch head add successfully!!'
-        })
-    })
-})
+//         res.status(201).json({
+//             status : 'success',
+//             message : 'Branch head add successfully!!'
+//         })
+//     })
+// })
 
 // Get all branch head
-exports.getAllBranchHead = catchAsync(async(req, res, next) => {
+// exports.getAllBranchHead = catchAsync(async(req, res, next) => {
 
-    const sql = `SELECT * FROM org_branch_head`;
-    con.query(sql, (err, result) => {
+//     const sql = `SELECT * FROM org_branch_head`;
+//     con.query(sql, (err, result) => {
 
-        if(err) return next(new AppError('Something went wrong!', 400));
-        if(result.length == 0) return next(new AppError('No Records Found!', 204));
+//         if(err) return next(new AppError('Something went wrong!', 400));
+//         if(result.length == 0) return next(new AppError('No Records Found!', 204));
 
-        res.status(200).json({
-            status: 'success',
-            data: result
-        })
-    })
-})
+//         res.status(200).json({
+//             status: 'success',
+//             data: result
+//         })
+//     })
+// })
 
 // Create add branch hr
 exports.addBranchHr = catchAsync(async(req, res, next) => {

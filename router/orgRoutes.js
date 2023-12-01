@@ -22,10 +22,10 @@ router
     .get(orgController.getAllCompanyName)
 
 
-router
-    .route('/branch-head')
-    .post(orgController.addBranchHead)
-    .get(orgController.getAllBranchHead)
+// router
+//     .route('/branch-head')
+//     .post(orgController.addBranchHead)
+//     .get(orgController.getAllBranchHead)
 
 router
     .route('/branch-hr')
