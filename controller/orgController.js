@@ -189,11 +189,27 @@ exports.getAllBranchHr = catchAsync(async(req, res, next) => {
 
 
 // get branch with company name
+// exports.getBranchWithCompanyName = catchAsync(async(req, res, next) => {
+
+//     const comp_name = await req.body.comp_name;
+
+//     const sql = `SELECT branch_name FROM organisation_branch WHERE company_name = ?`;
+//     con.query(sql, comp_name, (err, result) => {
+
+//         if(err) return next(new AppError('Something went wrong!', 400));
+//         if(result.length == 0) return next(new AppError('No Records Found!', 204));
+        
+//         res.status(200).json({
+//             status : 'success',
+//             data : result
+//         })
+//     })
+// })
 exports.getBranchWithCompanyName = catchAsync(async(req, res, next) => {
 
     const comp_name = await req.body.comp_name;
 
-    const sql = `SELECT branch_name FROM organisation_branch WHERE company_name = ?`;
+    const sql = `SELECT branch_name FROM company_setup WHERE company_name = ?`;
     con.query(sql, comp_name, (err, result) => {
 
         if(err) return next(new AppError('Something went wrong!', 400));
