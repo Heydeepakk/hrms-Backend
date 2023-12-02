@@ -147,16 +147,38 @@ exports.getAllCompanyName = catchAsync(async(req, res, next) => {
 // })
 
 // Create add branch hr
+// exports.addBranchHr = catchAsync(async(req, res, next) => {
+
+//     const comp_name = await req.body.comp_name;
+//     const branch_name = await req.body.branch_name;
+//     const branch_head = await req.body.branch_head;
+//     const hr_phone = await req.body.hr_phone;
+//     const branch_hr = await req.body.branch_hr;
+
+//     const sql = `INSERT INTO org_branch_hr(comp_name, branch_name, branch_head, hr_phone, branch_hr) VALUES(?,?,?,?,?)`;
+//     const val = [comp_name, branch_name, branch_head, hr_phone, branch_hr];
+
+//     con.query(sql, val, (err, result) => {
+
+//         if(err) return next(new AppError('Something went wrong!', 400));
+//         if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+//         res.status(201).json({
+//             status : 'success', 
+//             message : 'Branch HR successfully Added!!'
+//         })
+//     })
+// })
 exports.addBranchHr = catchAsync(async(req, res, next) => {
 
-    const comp_name = await req.body.comp_name;
+    const company_name = await req.body.company_name;
     const branch_name = await req.body.branch_name;
-    const branch_head = await req.body.branch_head;
-    const hr_phone = await req.body.hr_phone;
-    const branch_hr = await req.body.branch_hr;
+    const empId = await req.body.empId;
+    const hr_name = await req.body.hr_name;
 
-    const sql = `INSERT INTO org_branch_hr(comp_name, branch_name, branch_head, hr_phone, branch_hr) VALUES(?,?,?,?,?)`;
-    const val = [comp_name, branch_name, branch_head, hr_phone, branch_hr];
+
+    const sql = `INSERT INTO human_resource(company_name, branch_name	, emp_id, hr_name) VALUES(?,?,?,?)`;
+    const val = [company_name, branch_name, empId, hr_name];
 
     con.query(sql, val, (err, result) => {
 
@@ -173,7 +195,7 @@ exports.addBranchHr = catchAsync(async(req, res, next) => {
 // Get all branch Hr
 exports.getAllBranchHr = catchAsync(async(req, res, next) => {
 
-    const sql = `SELECT * FROM org_branch_hr`
+    const sql = `SELECT * FROM human_resource`
 
     con.query(sql, (err, result) => {
 
