@@ -176,19 +176,22 @@ exports.addBranchHr = catchAsync(async(req, res, next) => {
     const empId = await req.body.empId;
     const hr_name = await req.body.hr_name;
 
+    for(let i =0;i<empId.length;i++){
+        let e_id = empId[i];
+        let hr = hr_name[i];
+        const sql = `INSERT INTO human_resource(company_name, branch_name	, emp_id, hr_name) VALUES(?,?,?,?)`;
+        const val = [company_name, branch_name, e_id, hr];
 
-    const sql = `INSERT INTO human_resource(company_name, branch_name	, emp_id, hr_name) VALUES(?,?,?,?)`;
-    const val = [company_name, branch_name, empId, hr_name];
+        con.query(sql, val, (err, result) => {
 
-    con.query(sql, val, (err, result) => {
+            if(err) return next(new AppError('Something went wrong!', 400));
+            if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
 
-        if(err) return next(new AppError('Something went wrong!', 400));
-        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
-
-        res.status(201).json({
-            status : 'success', 
-            message : 'Branch HR successfully Added!!'
         })
+    }
+    res.status(201).json({
+        status : 'success', 
+        message : 'Successfully Added!!'
     })
 })
 
