@@ -212,6 +212,26 @@ exports.getAllBranchHr = catchAsync(async(req, res, next) => {
     })  
 })
 
+//get employee with branch
+exports.getEmployeeWithBranch = catchAsync(async(req, res, next) => {
+
+    const company_name = await req.body.company_name;
+    const branch_name = await req.body.branch_name;
+
+
+    const sql = `SELECT emp_id,name FROM employee WHERE company = ? AND branch =?`;
+    con.query(sql, comp_name, (err, result) => {
+
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.length == 0) return next(new AppError('No Records Found!', 204));
+        
+        res.status(200).json({
+            status : 'success',
+            data : result
+        })
+    })
+})
+
 
 // get branch with company name
 // exports.getBranchWithCompanyName = catchAsync(async(req, res, next) => {

@@ -58,6 +58,10 @@ router
     .route('/delete-asset')
     .post(orgController.deleteAsset)
 
+router
+    .route('/get-employee-with-branch')
+    .post(orgController.getEmployeeWithBranch)
+
 
 
 module.exports = router;
