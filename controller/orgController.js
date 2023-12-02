@@ -311,7 +311,7 @@ exports.getHrWithCompanyAndBranchName = catchAsync(async(req, res, next) => {
 // })
 exports.addDepartment = catchAsync(async(req, res, next) => {
 
-    const company_id = await req.body.company_id;
+    const company_id = await req.body.branch_id;
     const department_name = await req.body.department_name;
 
     for(let i=0;i<department_name.length;i++){
