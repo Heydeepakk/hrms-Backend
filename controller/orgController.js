@@ -316,7 +316,7 @@ exports.addDepartment = catchAsync(async(req, res, next) => {
 
     for(let i=0;i<department_name.length;i++){
         let d_name = department_name[i];
-        const sql = `INSERT INTO department_setup(company_id, department_name) VALUES(?,?)`;
+        const sql = `INSERT INTO department_setup(branch_id, department_name) VALUES(?,?)`;
         const val = [company_id, d_name];
 
         con.query(sql, val, (err, result) => {
