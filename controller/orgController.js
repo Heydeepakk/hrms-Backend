@@ -253,7 +253,7 @@ exports.getBranchWithCompanyName = catchAsync(async(req, res, next) => {
 
     const comp_name = await req.body.comp_name;
 
-    const sql = `SELECT branch_name FROM company_setup WHERE company_name = ?`;
+    const sql = `SELECT id,branch_name FROM company_setup WHERE company_name = ?`;
     con.query(sql, comp_name, (err, result) => {
 
         if(err) return next(new AppError('Something went wrong!', 400));
@@ -288,27 +288,50 @@ exports.getHrWithCompanyAndBranchName = catchAsync(async(req, res, next) => {
 })
 
 // Add Departments
+// exports.addDepartment = catchAsync(async(req, res, next) => {
+
+//     const comp_name = await req.body.comp_name;
+//     const branch_name = await req.body.branch_name;
+//     const depart_name = await req.body.depart_name;
+
+//     const sql = `INSERT INTO org_department(company_name, branch_name, department_name) VALUES(?,?,?)`;
+//     const val = [comp_name, branch_name, depart_name];
+
+//     con.query(sql, val, (err, result) => {
+
+//         if(err) return next(new AppError('Something went wrong!', 400));
+//         if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+
+//         res.status(201).json({
+//             status: 'success',
+//             message: 'Department name added successfully!!'
+//         })
+
+//     })
+// })
 exports.addDepartment = catchAsync(async(req, res, next) => {
 
-    const comp_name = await req.body.comp_name;
-    const branch_name = await req.body.branch_name;
-    const depart_name = await req.body.depart_name;
+    const company_id = await req.body.company_id;
+    const department_name = await req.body.department_name;
 
-    const sql = `INSERT INTO org_department(company_name, branch_name, department_name) VALUES(?,?,?)`;
-    const val = [comp_name, branch_name, depart_name];
+    for(let i=0;i<department_name.length;i++){
+        let d_name = department_name[i];
+        const sql = `INSERT INTO department_setup(company_id, department_name) VALUES(?,?)`;
+        const val = [company_id, d_name];
 
-    con.query(sql, val, (err, result) => {
+        con.query(sql, val, (err, result) => {
 
-        if(err) return next(new AppError('Something went wrong!', 400));
-        if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
+            if(err) return next(new AppError('Something went wrong!', 400));
+            if(result.affectedRows == 0) return next(new AppError('No Records Add!!', 400));
 
-        res.status(201).json({
-            status: 'success',
-            message: 'Department name added successfully!!'
         })
-
+    }
+    res.status(201).json({
+        status: 'success',
+        message: 'Department name added successfully!!'
     })
 })
+
 
 //  Get all Departments
 exports.getAllDepartment = catchAsync(async(req, res, next) => {
