@@ -311,13 +311,13 @@ exports.getHrWithCompanyAndBranchName = catchAsync(async(req, res, next) => {
 // })
 exports.addDepartment = catchAsync(async(req, res, next) => {
 
-    const company_id = await req.body.branch_id;
+    const branch_id = await req.body.branch_id;
     const department_name = await req.body.department_name;
 
     for(let i=0;i<department_name.length;i++){
         let d_name = department_name[i];
         const sql = `INSERT INTO department_setup(branch_id, department_name) VALUES(?,?)`;
-        const val = [company_id, d_name];
+        const val = [branch_id, d_name];
 
         con.query(sql, val, (err, result) => {
 
