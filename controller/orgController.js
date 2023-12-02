@@ -220,7 +220,7 @@ exports.getEmployeeWithBranch = catchAsync(async(req, res, next) => {
 
 
     const sql = `SELECT emp_id,name FROM employee WHERE company = ? AND branch =?`;
-    con.query(sql, comp_name, (err, result) => {
+    con.query(sql, [company_name,branch_name], (err, result) => {
 
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.length == 0) return next(new AppError('No Records Found!', 204));
