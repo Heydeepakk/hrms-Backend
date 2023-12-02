@@ -171,14 +171,13 @@ exports.getAllCompanyName = catchAsync(async(req, res, next) => {
 // })
 exports.addBranchHr = catchAsync(async(req, res, next) => {
 
-    const company_name = await req.body.company_name;
-    const branch_name = await req.body.branch_name;
-    const empId = await req.body.empId;
-    const hr_name = await req.body.hr_name;
+    const company_name = await req.body.company;
+    const branch_name = await req.body.branch;
+    const branchhr = await req.body.branchhr;
 
-    for(let i =0;i<empId.length;i++){
-        let e_id = empId[i];
-        let hr = hr_name[i];
+    for(let i =0;i<branchhr.length;i++){
+        let e_id = branchhr[i].empId;
+        let hr = branchhr[i].name;
         const sql = `INSERT INTO human_resource(company_name, branch_name	, emp_id, hr_name) VALUES(?,?,?,?)`;
         const val = [company_name, branch_name, e_id, hr];
 
