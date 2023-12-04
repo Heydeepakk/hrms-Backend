@@ -449,13 +449,13 @@ exports.getOrgSetup = catchAsync(async(req, res, next) => {
 
 
                  if (d_result[index]==undefined) {
-                    result[index].department_name = '-';
-                    result[index].hr_name= '-';
+                    result[index].department_name = 'Null';
                 } else {
                     result[index].department_name = d_result[0].department_name;
                 }
-                 if(d_result!=undefined) {
+                if(d_result!=undefined) {
                     result[index].hr_name = d_result[0].hr_name;
+                    result[index].hr_name= 'Null';
                 }
                 if ((index+1) === result.length) {
                     res.status(200).json({
