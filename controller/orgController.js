@@ -434,7 +434,7 @@ exports.deleteAsset = catchAsync(async(req, res, next) => {
 // Get Org Setup details
 exports.getOrgSetup = catchAsync(async(req, res, next) => {
 
-    const sql = `SELECT id, company_name FROM company_setup`;
+    const sql = `SELECT cs.company_name,cs.branch_name,cs.head,ds.department_name,hr.hr_name FROM company_setup as cs join department_setup as ds on cs.id=ds.branch_id join human_resource as hr on cs.id=hr.branch_id GROUP BY department_name AND hr_name`;
     con.query(sql, (err, result) => {
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.length == 0) return next(new AppError('No Records Found!', 204));
