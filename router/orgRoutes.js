@@ -63,7 +63,7 @@ router
     .post(orgController.getEmployeeWithBranch)
 
 router
-    .route('/get-org_setup')
+    .route('/get-org-setup')
     .get(orgController.getOrgSetup)
 
 
