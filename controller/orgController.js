@@ -443,20 +443,27 @@ exports.getOrgSetup = catchAsync(async(req, res, next) => {
             let query = `SELECT GROUP_CONCAT(department_name SEPARATOR ', ') as department_name FROM department_setup WHERE branch_id=?`;
             let values = [r.id];
             con.query(query,values, (err, d_result) => {
-                // result[index].department_name = d_result[index].department_name;
-                if(d_result[index].department_name == undefined){
-                    console.log('pta na ky h');
+
+                 if (d_result[index]==undefined) {
+                    result[index].department_name = '-'; // or handle empty department names as needed
+
+                } else {
+                    result[index].department_name = d_result[0].department_name;
+
                 }
-                else{
-                    console.log(d_result[index].department_name);
+                if ((index+1) === result.length) {
+                    res.status(200).json({
+                        status: 'success',
+                        data: result
+                    });
                 }
             })
 
         })
 
-        res.status(200).json({
-            status : 'success',
-            data : result
-        })
+        // res.status(200).json({
+        //     status : 'success',
+        //     data : result
+        // })
     })
 });
