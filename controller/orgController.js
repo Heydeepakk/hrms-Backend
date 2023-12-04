@@ -171,15 +171,14 @@ exports.getAllCompanyName = catchAsync(async(req, res, next) => {
 // })
 exports.addBranchHr = catchAsync(async(req, res, next) => {
 
-    const company_name = await req.body.company;
-    const branch_name = await req.body.branch;
+    const branch_id = await req.body.branch_id;
     const branchhr = await req.body.branchhr;
 
     for(let i =0;i<branchhr.length;i++){
         let e_id = branchhr[i].empId;
         let hr = branchhr[i].name;
-        const sql = `INSERT INTO human_resource(company_name, branch_name	, emp_id, hr_name) VALUES(?,?,?,?)`;
-        const val = [company_name, branch_name, e_id, hr];
+        const sql = `INSERT INTO human_resource(branch_id, emp_id, hr_name) VALUES(?,?,?)`;
+        const val = [branch_id, e_id, hr];
 
         con.query(sql, val, (err, result) => {
 
@@ -431,3 +430,18 @@ exports.deleteAsset = catchAsync(async(req, res, next) => {
 
     })
 })
+
+// Get Org Setup details
+exports.getOrgSetup = catchAsync(async(req, res, next) => {
+
+    const sql = `SELECT id, company_name FROM company_setup`;
+    con.query(sql, (err, result) => {
+        if(err) return next(new AppError('Something went wrong!', 400));
+        if(result.length == 0) return next(new AppError('No Records Found!', 204));
+
+        res.status(200).json({
+            status : 'success',
+            data : result
+        })
+    })
+});

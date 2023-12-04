@@ -62,6 +62,9 @@ router
     .route('/get-employee-with-branch')
     .post(orgController.getEmployeeWithBranch)
 
+router
+    .route('/get-org_setup')
+    .get(orgController.getOrgSetup)
 
 
 module.exports = router;
