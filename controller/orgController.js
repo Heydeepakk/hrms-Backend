@@ -439,14 +439,11 @@ exports.getOrgSetup = catchAsync(async(req, res, next) => {
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.length == 0) return next(new AppError('No Records Found!', 204));
 
-        result.map(async (r,index)=>{
+        result.map((r,index)=>{
             let query = `SELECT (SELECT GROUP_CONCAT(department_name SEPARATOR ', ') as department_name FROM department_setup WHERE branch_id=?) as department_name,
             (SELECT GROUP_CONCAT(hr_name SEPARATOR ', ') as hr_name FROM human_resource WHERE branch_id=?) as hr_name`;
             let values = [r.id,r.id];
             con.query(query,values, (err, d_result) => {
-                console.log(d_result[0].department_name)
-                console.log(d_result[0].hr_name)
-
 
                 if(d_result){
                     result[index].department_name = d_result[0].department_name;
