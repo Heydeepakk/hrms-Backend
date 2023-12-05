@@ -366,12 +366,14 @@ exports.getDepartmentWithCompanyBranchName = catchAsync(async(req, res, next) =>
             res.status(200).json({
                 status : '204',
             })        
+        }else{
+            res.status(200).json({
+                status : 'success',
+                data : result
+            })
+
         }
 
-        res.status(200).json({
-            status : 'success',
-            data : result
-        })
         
     })
 })
