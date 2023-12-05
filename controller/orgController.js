@@ -355,7 +355,7 @@ exports.getDepartmentWithCompanyBranchName = catchAsync(async(req, res, next) =>
     const compName = await req.body.comp_name;
     const branchName  = await req.body.branch_name;
 
-    const sql = `SELECT ds.department_name FROM department_setup as ds join company_setup as cs on cs.id=ds.branch_id WHERE ds.company_name=? AND ds.branch_name=?`;
+    const sql = `SELECT ds.department_name FROM department_setup as ds join company_setup as cs on cs.id=ds.branch_id WHERE cs.company_name=? AND cs.branch_name=?`;
     const val = [compName, branchName];
 
     con.query(sql, val, (err, result) => {
