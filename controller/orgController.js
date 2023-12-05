@@ -363,7 +363,7 @@ exports.getDepartmentWithCompanyBranchName = catchAsync(async(req, res, next) =>
         if(err) return next(new AppError('Something went wrong!', 400));
         // if(result.length == 0) return next(new AppError('No Records Found!', 204));
         if(result.length<=0){
-            result = 'N/A';
+            result = 'No record found!!!';
         }
 
         res.status(200).json({
