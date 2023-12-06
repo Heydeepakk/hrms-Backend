@@ -57,10 +57,11 @@ exports.validateOtp = catchAsync(async(req, res, next) => {
                     res.status(200).json({
                         status : 'success',
                         message : 'Successfully Login!',
-                        data : {
-                            phone: el.phone,
-                            emp_id: el.emp_id
-                        }
+                        data : el
+                        // data : {
+                        //     phone: el.phone,
+                        //     emp_id: el.emp_id
+                        // }
                     })
                 }else{
                     return next(new AppError('OTP Invalid! Please try again later!!', 400))
