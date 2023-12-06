@@ -7,7 +7,7 @@ const con = require('../utils/db');
 
 exports.getLeaves = catchAsync(async(req, res,next) => {
 
-    const sql = `SELECT l.*,e.name FROM leaves as l left join employee as e on l.emp_id=e.emp_id  `
+    const sql = `SELECT l.*,e.name,e.reporting_manager FROM leaves as l left join employee as e on l.emp_id=e.emp_id  `
 
     con.query(sql, (err, result) => {
 
