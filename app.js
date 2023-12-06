@@ -7,6 +7,7 @@ const globalErrorController = require('./controller/errorController');
 const authRoutes = require('./router/authRoutes');
 const orgRoutes = require('./router/orgRoutes');
 const empRoutes = require('./router/empRoutes');
+const leaveRoutes = require('./router/leaveRoutes')
 //ankit
 // start app
 const app = express();
@@ -27,6 +28,8 @@ app.options('*', cors());
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/org', orgRoutes);
 app.use('/api/v1/employee', empRoutes)
+app.use('/api/v1/leave', leaveRoutes)
+
 
 
 // this middleware used for all unhandled routes that we not created
