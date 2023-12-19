@@ -59,7 +59,7 @@ exports.addCompanyBranch = catchAsync(async(req, res, next)  => {
 // });
 exports.getAllCompanyName = catchAsync(async(req, res, next) => {
 
-    const sql = `SELECT DISTINCT(company_name),GROUP_CONCAT(id) as id FROM company_setup`;
+    const sql = `SELECT DISTINCT(company_name),GROUP_CONCAT(id) as id FROM company_setup GROUP by company_name`;
     con.query(sql, (err, result) => {
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.length == 0) return next(new AppError('No Records Found!', 204));
