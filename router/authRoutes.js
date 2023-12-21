@@ -7,6 +7,10 @@ router
     .route('/login')
     .post(authController.login);
 
+    router
+    .route('/employee-login')
+    .post(authController.employeeLogin);
+
 router
     .route('/validate-otp')
     .post(authController.validateOtp)
