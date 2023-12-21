@@ -111,3 +111,34 @@ exports.validateOtp = catchAsync(async(req, res, next) => {
     })
 
 })
+
+exports.empValidateOtp = catchAsync(async(req, res, next) => {
+
+    const phone = await req.body.phone;
+    const otp = await req.body.otp;
+
+    const sql = `SELECT * FROM employee WHERE phone='${phone}' `;
+    con.query(sql, (err, result) => {
+
+        if(result.length > 0){
+            result.forEach(el => {
+                if(otp == el.otp){
+    
+                    res.status(200).json({
+                        status : 'success',
+                        message : 'Successfully Login!',
+                        data : el
+                        // data : {
+                        //     phone: el.phone,
+                        //     emp_id: el.emp_id
+                        // }
+                    })
+                }else{
+                    return next(new AppError('OTP Invalid! Please try again later!!', 400))
+                }
+            })
+        }
+        
+    })
+
+})
