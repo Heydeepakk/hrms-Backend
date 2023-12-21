@@ -8,7 +8,7 @@ exports.login = catchAsync(async(req, res, next) => {
     const phone = await req.body.phone;
     const empId = await req.body.empId;
 
-    const sql = `SELECT emp_id, phone FROM admin UNION ALL SELECT emp_id, phone FROM employee WHERE emp_id='${empId}' AND phone='${phone}' AND status='Active'`;
+    const sql = `SELECT emp_id, phone FROM admin, employee WHERE emp_id='${empId}' AND phone='${phone}' AND status='Active'`;
     con.query(sql, (err, result) => {  
         
         if(err) return next(new AppError('Something went wrong!!', 400))
