@@ -61,6 +61,9 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
                 console.log('yes');
                 uploadFile = process.env.IMAGE_URL + rand + '.png';
             }
+            else{
+                uploadFile = process.env.NO_IMAGE;
+            }
 
             const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
             const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,experienceYear, experienceMonth,uploadFile,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address]
@@ -94,6 +97,9 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
                 if(image){
                     console.log('yes');
                     uploadFile = process.env.IMAGE_URL + rand + '.png';
+                }else{
+                    uploadFile = process.env.NO_IMAGE;
+
                 }
 
                 const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
@@ -124,6 +130,7 @@ exports.getAllEmployee = catchAsync(async(req, res, next) => {
 
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.length == 0) return next(new AppError('No Records Found!', 204));
+        let noImage = process.env.NO_IMAGE;
 
         for (let i = 0; i < result.length; i++) {
             const filePath = result[i].image;
