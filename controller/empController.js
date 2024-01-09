@@ -136,7 +136,6 @@ exports.getAllEmployee = catchAsync(async(req, res, next) => {
         for (let i = 0; i < result.length; i++) {
             const filePath = result[i].image;
             const imageBuffer = fs.readFileSync(filePath);
-
             const base64Image = imageBuffer.toString('base64');
             result[i].image = 'data:image/png;base64,' + base64Image;
 
