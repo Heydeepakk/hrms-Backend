@@ -26,11 +26,14 @@ exports.addCompanyBranch = catchAsync(async(req, res, next)  => {
     const company_name = await req.body.company_name;
     const branch_name = await req.body.branch_name;
     const branch_address = await req.body.branch_address;
+    const city = await req.body.city;
+    const state = await req.body.state;
+    const branch_landmark = await req.body.branch_landmark;
 
 
 
-    const sql = `INSERT INTO company_setup(company_name,branch_name,branch_address) VALUES(?,?,?)`;
-    con.query(sql,[company_name,branch_name,branch_address], (err, result) => {
+    const sql = `INSERT INTO company_setup(company_name,branch_name,branch_address,city,state,branch_landmark) VALUES(?,?,?,?,?,?)`;
+    con.query(sql,[company_name,branch_name,branch_address,city,state,branch_landmark], (err, result) => {
         
         if(err) return next(new AppError('Something went wrong! Please try again later!', 400))
         if(result.affectedRows == 0) return next(new AppError('Please fill the Inputs!', 400))
@@ -441,7 +444,7 @@ exports.deleteAsset = catchAsync(async(req, res, next) => {
 // Get Org Setup details
 exports.getOrgSetup = catchAsync(async(req, res, next) => {
 
-    const sql = `SELECT id,company_name,branch_name,branch_address from company_setup`;
+    const sql = `SELECT id,company_name,branch_name,branch_address,city,state,branch_landmark from company_setup`;
     con.query(sql, (err, result) => {
         if(err) return next(new AppError('Something went wrong!', 400));
         if(result.length == 0) return next(new AppError('No Records Found!', 204));
