@@ -68,7 +68,7 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
                 uploadFile = process.env.NO_IMAGE;
             }
 
-            const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,marital_status,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+            const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,marital_status,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
             const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,marital_status,experienceYear, experienceMonth,uploadFile,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address]
 
             con.query(sql, val, (err, result) => {
@@ -106,7 +106,7 @@ exports.addEmployee = catchAsync(async(req, res, next) => {
 
                 }
 
-                const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,marital_status,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+                const sql = `INSERT INTO employee(name,emp_id,company,branch,department,designation,dob,doj,ctc,reporting_manager,official_email,official_mobile,address,district,state,pan,aadhaar,gender,marital_status,experience_year,experience_month,image,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
                 const val = [name,empId,company,branch,department,designation,dob,doj,ctc,reportingManager,officialEmail,officialMobile,address,district,state,pan,aadhaar,gender,marital_status,experienceYear, experienceMonth,uploadFile,personal_mobile,account_holder_name, account_no, bank_name, bank_branch, ifsc, payment_type, e_name, e_mobile, e_email, e_address]
 
                 con.query(sql, val, (err, result) => {
