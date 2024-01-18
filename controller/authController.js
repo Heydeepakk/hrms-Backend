@@ -47,7 +47,7 @@ exports.employeeLogin = catchAsync(async(req, res, next) => {
     const phone = await req.body.phone;
     const empId = await req.body.empId;
 
-    const sql = `SELECT emp_id, phone FROM employee WHERE emp_id='${empId}' AND phone='${phone}' AND status='Active'`;
+    const sql = `SELECT emp_id, official_mobile FROM employee WHERE emp_id='${empId}' AND official_mobile='${phone}' AND status='Active'`;
     con.query(sql, (err, result) => {  
         
         if(err) return next(new AppError('Something went wrong!!', 400))
@@ -55,7 +55,7 @@ exports.employeeLogin = catchAsync(async(req, res, next) => {
 
         const rand = Math.floor(Math.random() * 9000 + 1000);
 
-        const sql2 = `UPDATE employee SET otp=? WHERE phone='${phone}'`;
+        const sql2 = `UPDATE employee SET otp=? WHERE official_mobile='${phone}'`;
         con.query(sql2, rand, (err, result) => {            
             
             if(err) return next(new AppError('Something went wrong! OTP sent failed!!', 400));
@@ -117,7 +117,7 @@ exports.empValidateOtp = catchAsync(async(req, res, next) => {
     const phone = await req.body.phone;
     const otp = await req.body.otp;
 
-    const sql = `SELECT * FROM employee WHERE phone='${phone}' `;
+    const sql = `SELECT * FROM employee WHERE official_mobile='${phone}' `;
     con.query(sql, (err, result) => {
 
         if(result.length > 0){
